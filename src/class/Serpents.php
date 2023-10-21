@@ -6,7 +6,7 @@ class Serpents
 {
     public function __construct(
         private $id = null,
-        private $table = "spectacles",
+        private $table = "serpents",
         private $colonnes = ['nom', 'poids', 'dureeDeVie', 'DateNaissance', 'isMale','isDead', 'idRace']
     )
     {
