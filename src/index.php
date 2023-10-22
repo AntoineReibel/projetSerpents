@@ -40,9 +40,9 @@ include_once("menu.php");
 
     ?>
 </main>
-<footer class="bg-neutral-200 text-center dark:bg-neutral-700 lg:text-left">
+
     <?php include_once ("footer.php")?>
-</footer>
+
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 </body>
 </html>

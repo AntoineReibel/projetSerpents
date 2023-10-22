@@ -7,7 +7,7 @@ class Serpents
     public function __construct(
         private $id = null,
         private $table = "serpents",
-        private $colonnes = ['nom', 'poids', 'dureeDeVie', 'DateNaissance', 'isMale','isDead', 'idRace']
+        private $colonnes = ['nomSerpent', 'poids', 'dureeDeVie', 'DateNaissance', 'isMale', 'idRace','isDead']
     )
     {
     }
@@ -24,11 +24,6 @@ class Serpents
         return $sql->executeRequest("SELECT * FROM $this->table ORDER BY $colonne");
     }
 
-    public function nextEvent()
-    {
-        $sql = new Bdd();
-        return $sql->executeRequest("SELECT * FROM $this->table WHERE date_evenement > CURDATE() ORDER BY date_evenement LIMIT 1");
-    }
 
     public function get($colonne)
     {
