@@ -15,7 +15,7 @@ class Serpents
     public function selectAll()
     {
         $sql = new Bdd();
-        return $sql->executeRequest("SELECT * FROM $this->table");
+        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace");
     }
 
     public function orderBy($colonne)
