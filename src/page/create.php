@@ -8,14 +8,10 @@ $races = $bdd->selectAll();
 
 $serpentTable = new Serpents();
 
+
+
 if (isset($_POST['create'])) {
-    $dateActuelleNonFormate = new DateTime('now', new DateTimeZone('Europe/Paris'));
-    $dateActuelleClone = clone $dateActuelleNonFormate;
-    $minutesEnPlus = new DateInterval('PT' . mt_rand(3, 7) . 'M');
-    $dateActuelleClone->add($minutesEnPlus);
-    $dateActuelle = $dateActuelleNonFormate->format('Y-m-d H:i:s');
-    $dateMort = $dateActuelleClone->format('Y-m-d H:i:s');
-    $data = [$_POST['nomSerpent'], $_POST['poids'], $dateMort, $dateActuelle, $_POST['genre'],$_POST['race'], 0];
+    $data = [$_POST['nomSerpent'], $_POST['poids'], dateMort(), dateActuelle(), $_POST['genre'],$_POST['race'], 0];
     $serpentTable->insert($data);
 }
 

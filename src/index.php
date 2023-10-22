@@ -1,6 +1,8 @@
 <?php
 spl_autoload_register();
 session_start();
+
+include_once ('./function/datesFormatees.php');
 ?>
 
 
