@@ -1,7 +1,7 @@
 <div class="justify-center flex">
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="index.php?page=vivarium">
-            <img class="rounded-t-lg" src="images/serpents.png" alt="serpent"/>
+            <img class="rounded-t-lg" src="images/boa.png" alt="serpent"/>
         </a>
         <div class="p-5">
             <a href="index.php?page=vivarium">

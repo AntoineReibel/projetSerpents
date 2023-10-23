@@ -3,6 +3,7 @@ spl_autoload_register();
 session_start();
 
 include_once ('./function/datesFormatees.php');
+include_once ('./function/image.php');
 ?>
 
 

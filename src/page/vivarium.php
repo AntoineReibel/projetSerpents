@@ -55,17 +55,17 @@ $serpents = $bdd->selectAll();
 
         <?php foreach ($serpents as $serpent) { ?>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 hover:text-emerald-600">
                     <a href="index.php?page=edit&id= <?= $serpent['id_serpents'] ?> ">Modifier</a>
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 hover:text-red-600">
                     <a href="index.php?page=delete&id= <?= $serpent['id_serpents'] ?> ">Tuer</a>
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 hover:text-pink-500">
                     <a href="">Envoyer dans la love room</a>
                 </td>
                 <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                    <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg"
+                    <img class="w-10 h-10 rounded-full" src="<?= getImage($serpent['idRace']) ?>"
                          alt="Jese image">
                     <div class="pl-3">
                         <div class="text-base font-semibold"><?= $serpent['nomSerpent'] ?></div>

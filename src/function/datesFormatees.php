@@ -17,7 +17,7 @@ function dateMort() : string
 function ajout15Minutes($date) : string
 {
     $dateObjet = DateTime::createFromFormat('Y-m-d H:i:s', $date);
-    $minutesEnPlus = new DateInterval('PT' . 15 . 'M');
+    $minutesEnPlus = new DateInterval('PT15M');
     $dateObjet->add($minutesEnPlus);
     return $dateObjet->format('Y-m-d H:i:s');
 }
