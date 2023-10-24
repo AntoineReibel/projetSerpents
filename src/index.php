@@ -5,8 +5,7 @@ session_start();
 include_once ('./function/datesFormatees.php');
 include_once ('./function/image.php');
 ?>
-
-
+TEST TOTAL
 <!doctype html>
 <html lang="en">
 <head>
