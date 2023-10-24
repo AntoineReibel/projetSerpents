@@ -4,7 +4,7 @@ use class\Serpents;
 
 $serpent = new Serpents($_GET['id']);
 if (isset($_POST['kill'])){
-    $serpent->delete();
+    $serpent->set('isDead','1');
     header('Location: index.php?page=vivarium');
 }
 
