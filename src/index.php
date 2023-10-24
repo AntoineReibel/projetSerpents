@@ -14,6 +14,7 @@ include_once ('./function/image.php');
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="../dist/output.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Lato:wght@400;700;900&display=swap"

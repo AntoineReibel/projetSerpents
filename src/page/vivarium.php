@@ -28,22 +28,22 @@ $serpents = $bdd->orderBy('nomSerpent');
             <th scope="col" class="px-6 py-3">
 
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=nomSerpent" hx-target="#target" scope="col" class="px-6 py-3">
                 Nom
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=nomRace" hx-target="#target" scope="col" class="px-6 py-3">
                 race
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=isMale" hx-target="#target" scope="col" class="px-6 py-3">
                 Genre
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=poids" hx-target="#target" scope="col" class="px-6 py-3">
                 poids
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=dateNaissance" hx-target="#target" scope="col" class="px-6 py-3">
                 Date de naissance
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=dureeDeVie" hx-target="#target" scope="col" class="px-6 py-3">
                 Date de mort
             </th>
             <th scope="col" class="px-6 py-3">
@@ -51,7 +51,7 @@ $serpents = $bdd->orderBy('nomSerpent');
             </th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="target">
 
         <?php foreach ($serpents as $serpent) {
             if (!$serpent['isDead']) {
