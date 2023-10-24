@@ -3,7 +3,7 @@
 use class\Serpents;
 
 $bdd = new Serpents();
-$serpents = $bdd->selectAll();
+$serpents = $bdd->orderBy('nomSerpent');
 ?>
 
 

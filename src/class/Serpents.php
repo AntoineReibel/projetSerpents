@@ -21,7 +21,7 @@ class Serpents
     public function orderBy($colonne)
     {
         $sql = new Bdd();
-        return $sql->executeRequest("SELECT * FROM $this->table ORDER BY $colonne");
+        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace ORDER BY $colonne");
     }
 
 
