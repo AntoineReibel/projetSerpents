@@ -18,10 +18,10 @@ class Serpents
         return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace");
     }
 
-    public function orderBy($colonne)
+    public function orderBy($colonne, $sens='ASC')
     {
         $sql = new Bdd();
-        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace ORDER BY $colonne");
+        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace ORDER BY $colonne $sens");
     }
 
 

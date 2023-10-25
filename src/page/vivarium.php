@@ -3,7 +3,25 @@
 use class\Serpents;
 
 $bdd = new Serpents();
-$serpents = $bdd->orderBy('nomSerpent');
+
+if (!isset($_SESSION['order'])) {
+    $_SESSION['order'] =
+        [
+            "nomSerpent" => "ASC",
+            "nomRace" => "ASC",
+            "isMale" => "ASC",
+            "isDead" => "ASC",
+            "dateNaissance" => "ASC",
+            "dureeDeVie" => "ASC",
+            "poids" => "ASC"
+        ];
+}
+if (!isset($_SESSION['currentOrder'])) {
+    $_SESSION['currentOrder'] = "nomSerpent";
+}
+
+$serpents = $bdd->orderBy($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']]);
+
 ?>
 
 
@@ -28,22 +46,28 @@ $serpents = $bdd->orderBy('nomSerpent');
             <th scope="col" class="px-6 py-3">
 
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=nomSerpent" hx-target="#target" scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=nomSerpent" hx-target="#target" scope="col"
+                class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 Nom
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=nomRace" hx-target="#target" scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=nomRace" hx-target="#target" scope="col"
+                class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 race
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=isMale" hx-target="#target" scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=isMale" hx-target="#target" scope="col"
+                class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 Genre
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=poids" hx-target="#target" scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=poids" hx-target="#target" scope="col"
+                class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 poids
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=dateNaissance" hx-target="#target" scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=dateNaissance" hx-target="#target" scope="col"
+                class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 Date de naissance
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=dureeDeVie" hx-target="#target" scope="col" class="px-6 py-3">
+            <th hx-get="page/ajax/orderBy.php?orderBy=dureeDeVie" hx-target="#target" scope="col"
+                class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 Date de mort
             </th>
             <th scope="col" class="px-6 py-3">
