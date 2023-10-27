@@ -24,19 +24,32 @@ if (!isset($_SESSION['paginate'])) {
     $_SESSION['paginate'] = 10;
 }
 
+if (!isset($_GET['list'])) {
+    $_GET['list'] = 1;
+}
+
+if (isset($_POST['create'])) {
+    $bdd->create15();
+}
+
 $serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']], (isset($_GET['list']) ? (($_GET['list'] - 1) * $_SESSION['paginate']) : 0), $_SESSION['paginate']);
 
 ?>
 
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div class="flex items-center justify-between py-4 bg-white dark:bg-gray-800">
+    <div class="flex items-center justify-start gap-3 py-4 bg-white dark:bg-gray-800">
         <a href="index.php?page=create">
             <button class="relative py-2 px-8 text-black text-base font-bold uppercase rounded-[50px] overflow-hidden bg-white transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-emerald-600 before:to-emerald-400 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-[50px] hover:before:left-0">
-                Créer un serpent !
+                serpent sur mesure
             </button>
 
         </a>
+        <form method="post" action="">
+            <button name="create" class="relative py-2 px-8 text-black text-base font-bold uppercase rounded-[50px] overflow-hidden bg-white transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-emerald-600 before:to-emerald-400 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-[50px] hover:before:left-0">
+                Créer 15 serpents !
+            </button>
+        </form>
     </div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
