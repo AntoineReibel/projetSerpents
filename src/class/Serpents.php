@@ -18,7 +18,18 @@ class Serpents
         return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace");
     }
 
-    public function orderBy($colonne, $sens='ASC')
+    public function countAliveSerpent() {
+        $sql = new Bdd();
+        return $sql->executeRequest("SELECT COUNT(*) AS totalSerpents FROM serpents WHERE isDead = 0 ");
+    }
+
+    public function paginate($colonne, $sens, $position, $nombreParPage, $isDead = 0 )
+    {
+        $sql = new Bdd();
+        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace WHERE isDead = $isDead ORDER BY $colonne $sens  LIMIT $position, $nombreParPage");
+    }
+
+    public function orderBy($colonne, $sens)
     {
         $sql = new Bdd();
         return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace ORDER BY $colonne $sens");

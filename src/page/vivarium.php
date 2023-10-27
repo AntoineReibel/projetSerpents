@@ -20,7 +20,11 @@ if (!isset($_SESSION['currentOrder'])) {
     $_SESSION['currentOrder'] = "nomSerpent";
 }
 
-$serpents = $bdd->orderBy($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']]);
+if (!isset($_SESSION['paginate'])) {
+    $_SESSION['paginate'] = 10;
+}
+
+$serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']], (isset($_GET['list']) ? (($_GET['list'] - 1) * $_SESSION['paginate']) : 0), $_SESSION['paginate']);
 
 ?>
 
@@ -46,27 +50,28 @@ $serpents = $bdd->orderBy($_SESSION['currentOrder'], $_SESSION['order'][$_SESSIO
             <th scope="col" class="px-6 py-3">
 
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=nomSerpent" hx-target="#target" scope="col"
+            <th hx-get="page/ajax/orderBy.php?orderBy=nomSerpent&list=<?= $_GET['list'] ?? 1 ?>" hx-target="#target"
+                scope="col"
                 class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 Nom
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=nomRace" hx-target="#target" scope="col"
+            <th hx-get="page/ajax/orderBy.php?orderBy=nomRace&list=<?= $_GET['list'] ?? 1 ?>" hx-target="#target" scope="col"
                 class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 race
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=isMale" hx-target="#target" scope="col"
+            <th hx-get="page/ajax/orderBy.php?orderBy=isMale&list=<?= $_GET['list'] ?? 1 ?>" hx-target="#target" scope="col"
                 class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 Genre
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=poids" hx-target="#target" scope="col"
+            <th hx-get="page/ajax/orderBy.php?orderBy=poids&list=<?= $_GET['list'] ?? 1 ?>" hx-target="#target" scope="col"
                 class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 poids
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=dateNaissance" hx-target="#target" scope="col"
+            <th hx-get="page/ajax/orderBy.php?orderBy=dateNaissance&list=<?= $_GET['list'] ?? 1 ?>" hx-target="#target" scope="col"
                 class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 Date de naissance
             </th>
-            <th hx-get="page/ajax/orderBy.php?orderBy=dureeDeVie" hx-target="#target" scope="col"
+            <th hx-get="page/ajax/orderBy.php?orderBy=dureeDeVie&list=<?= $_GET['list'] ?? 1 ?>" hx-target="#target" scope="col"
                 class="hover:text-blue-600 cursor-pointer px-6 py-3">
                 Date de mort
             </th>
@@ -77,9 +82,12 @@ $serpents = $bdd->orderBy($_SESSION['currentOrder'], $_SESSION['order'][$_SESSIO
         </thead>
         <tbody id="target">
 
- <?php require_once ('listSerpents.php') ?>
+        <?php require_once('listSerpents.php') ?>
 
         </tbody>
     </table>
 
 </div>
+<br>
+
+<?php include_once('paginate.php') ?>

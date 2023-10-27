@@ -14,7 +14,7 @@ if ($_SESSION['order'][$_GET['orderBy']] == 'ASC') {
 } else {
     $_SESSION['order'][$_GET['orderBy']] = 'ASC';
 }
-$serpents = $bdd->orderBy($_GET['orderBy'], $_SESSION['order'][$_GET['orderBy']]);
+$serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']], (isset($_GET['list']) ? (($_GET['list'] - 1) * $_SESSION['paginate']) : 0 ), $_SESSION['paginate']);
 
 require_once ('../listSerpents.php');
 
