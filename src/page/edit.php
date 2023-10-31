@@ -17,8 +17,6 @@ if (isset($_POST['edit'])) {
     }
 }
 
-var_dump($_POST);
-
 ?>
 
 <div class="flex flex-col items-center justify-center h-screen dark">

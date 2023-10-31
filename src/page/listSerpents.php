@@ -40,7 +40,7 @@ foreach ($serpents as $serpent) {
             <?= (new DateTime($serpent['dureeDeVie']))->format('d/m/y \à H\hi'); ?>
         </td>
         <td class="px-6 py-4">
-            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+            <a href="index.php?page=show&id= <?= $serpent['id_serpents'] ?> " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Profil</a>
         </td>
     </tr>
     <?php
