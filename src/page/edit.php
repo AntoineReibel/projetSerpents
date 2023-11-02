@@ -24,18 +24,18 @@ if (isset($_POST['edit'])) {
         <h2 class="text-2xl font-bold text-gray-200 mb-4">Modifier votre serpent</h2>
 
         <form method="post" action="" class="flex flex-col">
-            <input value="<?= $serpent->get('nomSerpent') ?>"
+            <input required value="<?= $serpent->get('nomSerpent') ?>"
                    class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                    type="text" name="nomSerpent">
-            <input value="<?= $serpent->get('poids') ?>"
+            <input required value="<?= $serpent->get('poids') ?>"
                    class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                    type="number" name="poids">
-            <select class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition ease-in-out duration-150"
+            <select required class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition ease-in-out duration-150"
                     name="genre">
                 <option value="1" <?php echo $serpent->get('isMale') == 1 ? 'selected' : null ?>>Male</option>
                 <option value="0" <?php echo $serpent->get('isMale') == 0 ? 'selected' : null ?>>Femelle</option>
             </select>
-            <select class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition ease-in-out duration-150"
+            <select required class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition ease-in-out duration-150"
                     name="race">
                 <?php foreach ($races as $race) { ?>
                     <option value="<?= $race['id_races'] ?>" <?php echo $race['id_races'] == $serpent->get('idRace') ? 'selected' : null ?>><?= $race['nomRace'] ?></option>

@@ -7,7 +7,7 @@ class Serpents
     public function __construct(
         private $id = null,
         private $table = "serpents",
-        private $colonnes = ['nomSerpent', 'poids', 'dureeDeVie', 'DateNaissance', 'isMale', 'idRace', 'isDead']
+        private $colonnes = ['nomSerpent', 'poids', 'dureeDeVie', 'DateNaissance', 'isMale', 'idRace']
     )
     {
     }
@@ -24,10 +24,10 @@ class Serpents
         return $sql->executeRequest("SELECT COUNT(*) AS totalSerpents FROM serpents WHERE isDead = 0 ");
     }
 
-    public function paginate($colonne, $sens, $position, $nombreParPage, $isDead = 0)
+    public function paginate($colonne, $sens, $position, $nombreParPage, $isDead = 0, $inLoveRoom = 0)
     {
         $sql = new Bdd();
-        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace WHERE isDead = $isDead ORDER BY $colonne $sens  LIMIT $position, $nombreParPage");
+        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace WHERE isDead = $isDead AND inLoveRoom = $inLoveRoom ORDER BY $colonne $sens  LIMIT $position, $nombreParPage");
     }
 
     public function orderBy($colonne, $sens)
@@ -65,7 +65,7 @@ class Serpents
     {
         $sql = new Bdd();
         for ($i = 0; $i < 15; $i++) {
-            $sql->insert($this->table, $this->colonnes, [$this->randomName(),rand(3,10),dateMort(), dateActuelle(),rand(0,1),rand(1,5),0]);
+            $sql->insert($this->table, $this->colonnes, [$this->randomName(),rand(3,10),dateMort(), dateActuelle(),rand(0,1),rand(1,5)]);
         }
     }
 

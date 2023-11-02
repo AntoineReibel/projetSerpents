@@ -11,7 +11,7 @@ $serpentTable = new Serpents();
 
 
 if (isset($_POST['create'])) {
-    $data = [$_POST['nomSerpent'], $_POST['poids'], dateMort(), dateActuelle(), $_POST['genre'],$_POST['race'], 0];
+    $data = [$_POST['nomSerpent'], $_POST['poids'], dateMort(), dateActuelle(), $_POST['genre'],$_POST['race']];
     $serpentTable->insert($data);
 }
 
@@ -29,18 +29,18 @@ if (isset($_POST['create'])) {
         <h2 class="text-2xl font-bold text-gray-200 mb-4">Créez votre serpent</h2>
 
         <form method="post" action="" class="flex flex-col">
-            <input placeholder="Nom"
+            <input required placeholder="Nom"
                    class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                    type="text" name="nomSerpent">
-            <input placeholder="poids"
+            <input required placeholder="poids (en kg)"
                    class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150"
                    type="number" name="poids">
-            <select class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition ease-in-out duration-150"
+            <select required class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition ease-in-out duration-150"
                     name="genre">
                 <option value="1">Male</option>
                 <option value="0">Femelle</option>
             </select>
-            <select class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition ease-in-out duration-150"
+            <select required class="bg-emerald-200 text-gray-700 border-0 rounded-md p-2 mb-4 focus:bg-emerald-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition ease-in-out duration-150"
                     name="race">
                 <?php foreach ($races as $race) { ?>
                     <option value="<?= $race['id_races'] ?>"><?= $race['nomRace'] ?></option>

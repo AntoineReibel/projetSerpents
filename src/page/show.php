@@ -9,9 +9,9 @@ $race = new Races($serpent->get('idRace'));
 ?>
 
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <a href="index.php?page=vivarium">
+    <div>
         <img class="rounded-t-lg" src="<?= getBigImage($serpent->get('idRace')) ?>" alt="serpent"/>
-    </a>
+    </div>
     <div class="flex flex-col items-center p-5 gap-3">
         <div class="font-bold text-2xl"><?= $serpent->get('nomSerpent') ?></div>
         <div class="flex gap-2">
