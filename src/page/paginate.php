@@ -3,7 +3,7 @@
 use class\Serpents;
 
 $sql = new Serpents();
-$totalSerpents = $sql->countAliveSerpent();
+$totalSerpents = $sql->count('isDead', 0);
 
 $nombrePages = (intdiv($totalSerpents[0]['totalSerpents'], $_SESSION['paginate']) + 1)
 ?>

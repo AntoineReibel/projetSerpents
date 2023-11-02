@@ -3,6 +3,7 @@
 use class\Serpents;
 
 $bdd = new Serpents();
+$loveRoomFull = false;
 
 if (!isset($_SESSION['order'])) {
     $_SESSION['order'] =
@@ -32,18 +33,29 @@ if (isset($_POST['create'])) {
     $bdd->create15();
 }
 
-if (isset($_POST['itemByPageSelect'])){
+if (isset($_POST['itemByPageSelect'])) {
     $_SESSION['paginate'] = $_POST['itemByPageSelect'];
+}
+
+if (isset($_POST['loveRoom'])) {
+    $serpentsInLoveRoom = $bdd->count('inLoveRoom', 1);
+    if ($serpentsInLoveRoom[0]['totalSerpents'] < 2) {
+        $bdd->set('inLoveRoom', 1, $_POST['loveRoom']);
+    } else {
+        $loveRoomFull = true;
+    }
 }
 
 $serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']], (isset($_GET['list']) ? (($_GET['list'] - 1) * $_SESSION['paginate']) : 0), $_SESSION['paginate']);
 
-if ($serpents == null){
+if ($serpents == null) {
     header("location: index.php?page=vivarium");
 }
 ?>
 
-
+<?php if ($loveRoomFull) { ?>
+    <p class="text-red-700">Deux serpents passent déjà du bon temps dans la love room !</p>
+<?php } ?>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <div class="flex items-center justify-start gap-3 py-4 bg-white dark:bg-gray-800">
         <a href="index.php?page=create">
@@ -125,10 +137,10 @@ if ($serpents == null){
             page</label>
         <select name="itemByPageSelect" id="itemByPageSelect"
                 class="block w-20 p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option value="10" <?php if ($_SESSION['paginate'] == 10) echo "selected"  ?>>10</option>
-            <option value="20" <?php if ($_SESSION['paginate'] == 20) echo "selected"  ?>>20</option>
-            <option value="30" <?php if ($_SESSION['paginate'] == 30) echo "selected"  ?>>30</option>
-            <option value="50" <?php if ($_SESSION['paginate'] == 50) echo "selected"  ?>>50</option>
+            <option value="10" <?php if ($_SESSION['paginate'] == 10) echo "selected" ?>>10</option>
+            <option value="20" <?php if ($_SESSION['paginate'] == 20) echo "selected" ?>>20</option>
+            <option value="30" <?php if ($_SESSION['paginate'] == 30) echo "selected" ?>>30</option>
+            <option value="50" <?php if ($_SESSION['paginate'] == 50) echo "selected" ?>>50</option>
         </select>
     </form>
 </div>

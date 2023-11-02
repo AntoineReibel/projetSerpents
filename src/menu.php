@@ -1,4 +1,4 @@
-<nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-emerald-500 mb-3">
+<nav class="relative flex flex-wrap items-center justify-between px-2 py-3 bg-emerald-500">
     <div class="container px-4 mx-auto flex flex-wrap items-center justify-between">
         <div class="w-full relative flex justify-between lg:w-auto  px-4 lg:static lg:block lg:justify-start">
             <a class="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white" href="index.php">
@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="#">
+                    <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:text-pink-500" href="index.php?page=loveroom">
                         Love Room
                     </a>
                 </li>

@@ -7,11 +7,13 @@ foreach ($serpents as $serpent) {
         <td class="px-6 py-4 hover:text-emerald-600">
             <a href="index.php?page=edit&id= <?= $serpent['id_serpents'] ?> ">Modifier</a>
         </td>
-        <td class="px-6 py-4 hover:text-red-600">
+        <td class="px-6 py-4 hover:text-rose-700">
             <a href="index.php?page=delete&id= <?= $serpent['id_serpents'] ?> ">Tuer</a>
         </td>
         <td class="px-6 py-4 hover:text-pink-500">
-            <a href="">Envoyer dans la love room</a>
+            <form method="post" action="">
+                <button value="<?= $serpent['id_serpents'] ?>" name="loveRoom" type="submit" class="bg-transparent border-none hover:text-pink-500">Envoyer dans la love room</button>
+            </form>
         </td>
         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
             <img class="w-10 h-10 rounded-full" src="<?= getImage($serpent['idRace']) ?>"
