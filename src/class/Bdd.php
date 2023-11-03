@@ -27,7 +27,7 @@ class Bdd
         if ($startRequest[0] == 'INSERT' || $startRequest[0] == 'UPDATE' || $startRequest[0] == 'SELECT' || $startRequest[0] == 'DELETE') {
             $res = $this->connection->query($request);
             if ($startRequest[0] == 'SELECT') $res = $res->fetchAll();
-            if ($startRequest[0] == 'INSERT') $this->connection->lastInsertId();
+            if ($startRequest[0] == 'INSERT') $res = $this->connection->lastInsertId();
             return $res;
         } else {
             return false;
@@ -64,7 +64,7 @@ class Bdd
         $this->executeRequest($request);
     }
 
-    public function insert($table, $colonnes, $data): void
+    public function insert($table, $colonnes, $data): int
     {
         foreach ($data as &$donneeEchapee) {
             $donneeEchapee = addslashes($donneeEchapee);
@@ -72,6 +72,6 @@ class Bdd
         $valeursColonnes = implode(", ", $colonnes);
         $valeursData = "'" . implode("','", $data) . "'";
         $request = "INSERT INTO $table ($valeursColonnes) VALUES ($valeursData)";
-        $this->executeRequest($request);
+       return $this->executeRequest($request);
     }
 }

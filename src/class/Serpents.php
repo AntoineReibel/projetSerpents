@@ -37,10 +37,11 @@ class Serpents
     }
 
 
-    public function get($colonne)
+    public function get($colonne, $id = null)
     {
+        $idCustom = $id == null ? $this->id : $id;
         $sql = new Bdd();
-        return $sql->select($this->table, $this->id, $colonne);
+        return $sql->select($this->table, $idCustom, $colonne);
     }
 
     public function set($colonne, $value, $id = null): void
@@ -70,7 +71,14 @@ class Serpents
         }
     }
 
-    public function loveRoom (){
+    public function giveBirth($idRace): int
+    {
+        $sql = new Bdd();
+            return $sql->insert($this->table, $this->colonnes, [$this->randomName(),rand(3,10),dateMort(), dateActuelle(),rand(0,1),$idRace]);
+    }
+
+    public function loveRoom () : array
+    {
         $sql = new Bdd();
         return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace WHERE inLoveRoom = 1 AND isDead = 0");
     }

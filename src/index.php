@@ -22,7 +22,7 @@ include_once ('./function/image.php');
           rel="stylesheet">
     <title>Document</title>
 </head>
-<body>
+<body class=" <?php echo isset($_GET['page']) == 'loveroom' ? 'bg-pink-100' : null ?>"  >
 <?php
 include_once("menu.php");
 ?>
@@ -47,6 +47,6 @@ include_once("menu.php");
 
     <?php include_once ("footer.php")?>
 
-<script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+<script src="../node_modules/flowbite/dist/flowbite.js"></script>
 </body>
 </html>

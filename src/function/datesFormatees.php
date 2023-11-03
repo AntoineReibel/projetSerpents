@@ -9,7 +9,7 @@ function dateActuelle() : string
 function dateMort() : string
 {
     $dateActuelle = new DateTime('now', new DateTimeZone('Europe/Paris'));
-    $minutesEnPlus = new DateInterval('PT' . mt_rand(3, 7) . 'M');
+    $minutesEnPlus = new DateInterval('PT' . mt_rand(4, 8) . 'M');
     $dateMort = $dateActuelle->add($minutesEnPlus);
     return $dateMort->format('Y-m-d H:i:s');
 }

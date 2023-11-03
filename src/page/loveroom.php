@@ -2,6 +2,8 @@
 
 use class\Serpents;
 
+$newBornBool = null;
+
 $bdd = new Serpents();
 
 if (isset($_POST['out'])) {
@@ -10,15 +12,54 @@ if (isset($_POST['out'])) {
 
 $serpents = $bdd->loveRoom();
 
+$newBorn = null;
+if (isset($_POST['love'])) {
+    if ($serpents[0]['idRace'] == $serpents[1]['idRace'] && $serpents[0]['isMale'] != $serpents[1]['isMale']) {
+        $newBorn = $bdd->giveBirth($serpents[0]['idRace']);
+        $newBornBool = 'baby';
+    } else {
+        $newBornBool = 'noBaby';
+    }
+}
+
 ?>
-
-
+<?php if ($newBornBool == 'baby') { ?>
+    <div id="alert-3"
+         class="flex items-center p-4 my-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+         role="alert">
+        <div class="ml-3 text-sm font-medium">
+            Les serpents se sont bien amusés et il y a un nouveau venu ! <?= $bdd->get('nomSerpent', $newBorn) ?> à
+            rejoins le vivarium !
+        </div>
+        <button type="button"
+                class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
+                data-dismiss-target="#alert-3" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+<?php } else if ($newBornBool == 'noBaby') { ?>
+    <div id="alert-4" class="flex items-center p-4 my-4 text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
+        <div class="ml-3 text-sm font-medium">
+            Les serpents se sont bien amusés, mais pas de bébé en vue !
+        </div>
+        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-yellow-50 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700" data-dismiss-target="#alert-4" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+<?php } ?>
 <?php
 if ($serpents == null) {
     echo "y'a deguin";
 } else if (count($serpents) == 2) {
     ?>
-    <div class="flex justify-around items-center bg-pink-200 py-3">
+    <div class="flex justify-around items-center py-3">
         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div>
                 <img class="rounded-t-lg" src="<?= getBigImage($serpents[0]['idRace']) ?>" alt="serpent"/>
@@ -52,11 +93,13 @@ if ($serpents == null) {
 
             </div>
         </div>
-        <button class="h-10 bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-        >
-            <i class="fas fa-heart"></i> Accoupler
-        </button>
+        <form method="post" action="">
+            <button name="love"
+                    class="h-10 bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            >
+                <i class="fas fa-heart"></i> Accoupler
+            </button>
+        </form>
         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div>
                 <img class="rounded-t-lg" src="<?= getBigImage($serpents[1]['idRace']) ?>" alt="serpent"/>
