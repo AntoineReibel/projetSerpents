@@ -67,22 +67,23 @@ class Serpents
     {
         $sql = new Bdd();
         for ($i = 0; $i < 15; $i++) {
-            $sql->insert($this->table, $this->colonnes, [$this->randomName(),rand(3,10),dateMort(), dateActuelle(),rand(0,1),rand(1,5)]);
+            $sql->insert($this->table, $this->colonnes, [$this->randomName(), rand(3, 10), dateMort(), dateActuelle(), rand(0, 1), rand(1, 5)]);
         }
     }
 
     public function giveBirth($idRace): int
     {
         $sql = new Bdd();
-            return $sql->insert($this->table, $this->colonnes, [$this->randomName(),rand(3,10),dateMort(), dateActuelle(),rand(0,1),$idRace]);
+        return $sql->insert($this->table, $this->colonnes, [$this->randomName(), rand(3, 10), dateMort(), dateActuelle(), rand(0, 1), $idRace]);
     }
 
-    public function loveRoom () : array
+    public function loveRoom(): array
     {
         $sql = new Bdd();
         return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace WHERE inLoveRoom = 1 AND isDead = 0");
     }
-    private function randomName() : string
+
+    private function randomName(): string
     {
         $names = ['Zephyr', 'Aurelia', 'Nyx', 'Ophelia', 'Lazarus', 'Circe', 'Elio', 'Astrid', 'Dahlia', 'Odin', 'Isolde', 'Cyrus', 'Aurora', 'Elysium', 'Jasper', 'Thalia', 'Kairos', 'Lorelei', 'Zara', 'Lysander', 'Selene', 'Leander', 'Evelina', 'Drake', 'Aurelian', 'Calypso', 'Soren', 'Daphne', 'Ezra', 'Cosima', 'Cassius', 'Olympia', 'Zora', 'Orpheus', 'Althea', 'Zephyrine', 'Helios', 'Thora', 'Cassiopeia', 'Zephyrus', 'Nephele', 'Aurelius', 'Ariadne', 'Calix', 'Leandra', 'Elysia', 'Zephyra', 'Cassian', 'Eulalia', 'Oleander', 'Zelda', 'Evanora', 'Cedric', 'Darius', 'Zenobia', 'Xander', 'Octavia', 'Cleopatra', 'Ezio', 'Aurelio', 'Zahir', 'Leda', 'Dante', 'Elara', 'Astraea', 'Ione', 'Saffron', 'Artemis', 'Cleopatra', 'Electra', 'Helena', 'Icarus', 'Juniper', 'Luna', 'Morpheus', 'Nero', 'Olympus', 'Pandora', 'Phoebe', 'Rhea', 'Solomon', 'Triton', 'Ulysses', 'Vesper', 'Xena', 'Zelda', 'Apollo', 'Athena', 'Boreas', 'Calliope', 'Dionysus', 'Eos', 'Hermes', 'Iris', 'Juno', 'Kratos', 'Lilith', 'Mars', 'Nike', 'Orion', 'Persephone', 'Raphael', 'Sappho', 'Triton', 'Urania', 'Venus', 'Xerxes', 'Zephyrus'];
 

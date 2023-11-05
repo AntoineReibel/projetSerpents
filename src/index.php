@@ -22,7 +22,7 @@ include_once ('./function/image.php');
           rel="stylesheet">
     <title>Document</title>
 </head>
-<body class=" <?php echo isset($_GET['page']) == 'loveroom' ? 'bg-pink-100' : null ?>"  >
+<body class="<?php echo isset($_GET['page']) && $_GET['page'] === 'loveroom' ? 'bg-pink-100' : '' ?>">
 <?php
 include_once("menu.php");
 ?>

@@ -16,6 +16,8 @@ $newBorn = null;
 if (isset($_POST['love'])) {
     if ($serpents[0]['idRace'] == $serpents[1]['idRace'] && $serpents[0]['isMale'] != $serpents[1]['isMale']) {
         $newBorn = $bdd->giveBirth($serpents[0]['idRace']);
+        $bdd->set('idPere',$serpents[0]['isMale'] == 1 ? $serpents[0]['id_serpents'] : $serpents[1]['id_serpents'],$newBorn );
+        $bdd->set('idMere',$serpents[0]['isMale'] == 0 ? $serpents[0]['id_serpents'] : $serpents[1]['id_serpents'],$newBorn );
         $newBornBool = 'baby';
     } else {
         $newBornBool = 'noBaby';

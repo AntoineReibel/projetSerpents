@@ -51,6 +51,7 @@ $serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSI
 if ($serpents == null) {
     header("location: index.php?page=vivarium");
 }
+
 ?>
 
 <?php if ($loveRoomFull) { ?>
