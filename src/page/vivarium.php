@@ -1,7 +1,10 @@
 <?php
 
+use class\Races;
 use class\Serpents;
 
+$bdd = new Races();
+$races = $bdd->selectAll();
 $bdd = new Serpents();
 $loveRoomFull = false;
 
@@ -45,6 +48,16 @@ if (isset($_POST['loveRoom'])) {
         $loveRoomFull = true;
     }
 }
+
+if (!isset($_SESSION['filtres'])) {
+    foreach ($races as $race) {
+        $_SESSION['filtres']['races'][] = $race['nomRace'];
+    }
+    $_SESSION['filtres']['isMale'][] = '0';
+    $_SESSION['filtres']['isMale'][] = '1';
+}
+
+var_dump($_SESSION['filtres']);
 
 $serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']], (isset($_GET['list']) ? (($_GET['list'] - 1) * $_SESSION['paginate']) : 0), $_SESSION['paginate']);
 

@@ -1,11 +1,14 @@
 <?php
 
 use class\Serpents;
+require_once ('function/pagination.php');
 
 $sql = new Serpents();
-$totalSerpents = $sql->count('isDead', 0);
+$selectSerpents = $sql->selectAll();
 
-$nombrePages = (intdiv($totalSerpents[0]['totalSerpents'], $_SESSION['paginate']) + 1)
+$totalSerpents = nombreSerpentsFiltre($selectSerpents);
+
+$nombrePages = (intdiv($totalSerpents, $_SESSION['paginate']) + 1)
 ?>
 
 <ul class="flex items-center justify-center -space-x-px h-8 text-sm">
