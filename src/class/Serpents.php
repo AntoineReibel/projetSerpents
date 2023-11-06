@@ -15,7 +15,7 @@ class Serpents
     public function selectAll()
     {
         $sql = new Bdd();
-        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace");
+        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace WHERE isDead = 0");
     }
 
     public function count($colonne, $value)
