@@ -51,19 +51,22 @@ if (isset($_POST['loveRoom'])) {
 
 if (!isset($_SESSION['filtres'])) {
     foreach ($races as $race) {
-        $_SESSION['filtres'][] = $race['nomRace'];
+        $_SESSION['filtres']['races'][] = $race['nomRace'];
     }
-    $_SESSION['filtres'][] = '0';
-    $_SESSION['filtres'][] = '1';
+    $_SESSION['filtres']['isMale'][] = '0';
+    $_SESSION['filtres']['isMale'][] = '1';
 }
 
-var_dump($_SESSION['filtres']);
-
-if (isset($_POST['filtrer'])){
-    $_SESSION['filtres'] = $_POST['filtres'];
+if (isset($_POST['filtrer'])) {
+    if (isset($_POST['races'])) {
+        $_SESSION['filtres']['races'] = $_POST['races'];
+    }
+    if (isset($_POST['isMale'])) {
+        $_SESSION['filtres']['isMale'] = $_POST['isMale'];
+    }
 }
 
-$serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']], (isset($_GET['list']) ? (($_GET['list'] - 1) * $_SESSION['paginate']) : 0), $_SESSION['paginate']);
+$serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']], (isset($_GET['list']) ? (($_GET['list'] - 1) * $_SESSION['paginate']) : 0), $_SESSION['paginate'], $_SESSION['filtres']['races'], $_SESSION['filtres']['isMale']);
 
 if ($serpents == null) {
     header("location: index.php?page=vivarium");
@@ -105,7 +108,8 @@ if ($serpents == null) {
                     aria-labelledby="dropdownSearchButton">
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="checkbox-item-11" type="checkbox" value="Anaconda" name="filtres[]" <?php echo in_array('Anaconda', $_SESSION['filtres']) ? 'checked' : ''  ?>
+                            <input id="checkbox-item-11" type="checkbox" value="Anaconda"
+                                   name="races[]" <?php echo in_array('Anaconda', $_SESSION['filtres']['races']) ? 'checked' : '' ?>
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                             <label for="checkbox-item-11"
                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Anaconda</label>
@@ -113,7 +117,8 @@ if ($serpents == null) {
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="checkbox-item-12" type="checkbox" value="Boa" name="filtres[]" <?php echo in_array('Boa', $_SESSION['filtres']) ? 'checked' : ''  ?>
+                            <input id="checkbox-item-12" type="checkbox" value="Boa"
+                                   name="races[]" <?php echo in_array('Boa', $_SESSION['filtres']['races']) ? 'checked' : '' ?>
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                             <label for="checkbox-item-12"
                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Boa</label>
@@ -121,7 +126,8 @@ if ($serpents == null) {
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="checkbox-item-13" type="checkbox" value="Cobra" name="filtres[]" <?php echo in_array('Cobra', $_SESSION['filtres']) ? 'checked' : ''  ?>
+                            <input id="checkbox-item-13" type="checkbox" value="Cobra"
+                                   name="races[]" <?php echo in_array('Cobra', $_SESSION['filtres']['races']) ? 'checked' : '' ?>
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                             <label for="checkbox-item-13"
                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Cobra</label>
@@ -129,7 +135,8 @@ if ($serpents == null) {
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="checkbox-item-14" type="checkbox" value="Python" name="filtres[]" <?php echo in_array('Python', $_SESSION['filtres']) ? 'checked' : ''  ?>
+                            <input id="checkbox-item-14" type="checkbox" value="Python"
+                                   name="races[]" <?php echo in_array('Python', $_SESSION['filtres']['races']) ? 'checked' : '' ?>
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                             <label for="checkbox-item-14"
                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Python</label>
@@ -137,7 +144,8 @@ if ($serpents == null) {
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="checkbox-item-15" type="checkbox" value="Vipère" name="filtres[]" <?php echo in_array('Vipère', $_SESSION['filtres']) ? 'checked' : ''  ?>
+                            <input id="checkbox-item-15" type="checkbox" value="Vipère"
+                                   name="races[]" <?php echo in_array('Vipère', $_SESSION['filtres']['races']) ? 'checked' : '' ?>
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                             <label for="checkbox-item-15"
                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Vipère</label>
@@ -145,7 +153,8 @@ if ($serpents == null) {
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="checkbox-item-16" type="checkbox" value="1" name="filtres[]" <?php echo in_array(1, $_SESSION['filtres']) ? 'checked' : ''  ?>
+                            <input id="checkbox-item-16" type="checkbox" value="1"
+                                   name="isMale[]" <?php echo in_array(1, $_SESSION['filtres']['isMale']) ? 'checked' : '' ?>
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                             <label for="checkbox-item-16"
                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Male</label>
@@ -153,7 +162,8 @@ if ($serpents == null) {
                     </li>
                     <li>
                         <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                            <input id="checkbox-item-17" type="checkbox" value="0" name="filtres[]" <?php echo in_array(0, $_SESSION['filtres']) ? 'checked' : ''  ?>
+                            <input id="checkbox-item-17" type="checkbox" value="0"
+                                   name="isMale[]" <?php echo in_array(0, $_SESSION['filtres']['isMale']) ? 'checked' : '' ?>
                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                             <label for="checkbox-item-17"
                                    class="w-full ml-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Femelle</label>
@@ -161,8 +171,8 @@ if ($serpents == null) {
                     </li>
                 </ul>
                 <button name="filtrer"
-                   class="flex items-center p-3 text-sm font-medium text-emerald-600 border-t border-gray-200 rounded-b-lg dark:border-gray-600 hover:text-emerald-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-red-500 hover:underline">
-                   Appliquer les filtres
+                        class="flex items-center p-3 text-sm font-medium text-emerald-600 border-t border-gray-200 rounded-b-lg dark:border-gray-600 hover:text-emerald-700 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-red-500 hover:underline">
+                    Appliquer les filtres
                 </button>
             </div>
 

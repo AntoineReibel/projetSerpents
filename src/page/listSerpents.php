@@ -2,7 +2,6 @@
 
 /** @var array $serpents */
 foreach ($serpents as $serpent) {
-    if ( in_array($serpent['nomRace'], $_SESSION['filtres']) && in_array($serpent['isMale'], $_SESSION['filtres'])) {
     ?>
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
         <td class="px-6 py-4 hover:text-emerald-600">
@@ -13,7 +12,9 @@ foreach ($serpents as $serpent) {
         </td>
         <td class="px-6 py-4 hover:text-pink-500">
             <form method="post" action="">
-                <button value="<?= $serpent['id_serpents'] ?>" name="loveRoom" type="submit" class="bg-transparent border-none hover:text-pink-500">Envoyer dans la love room</button>
+                <button value="<?= $serpent['id_serpents'] ?>" name="loveRoom" type="submit"
+                        class="bg-transparent border-none hover:text-pink-500">Envoyer dans la love room
+                </button>
             </form>
         </td>
         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
@@ -43,8 +44,9 @@ foreach ($serpents as $serpent) {
             <?= (new DateTime($serpent['dureeDeVie']))->format('d/m/y \à H\hi'); ?>
         </td>
         <td class="px-6 py-4">
-            <a href="index.php?page=show&id= <?= $serpent['id_serpents'] ?> " class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Profil</a>
+            <a href="index.php?page=show&id= <?= $serpent['id_serpents'] ?> "
+               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Profil</a>
         </td>
     </tr>
     <?php
-}} ?>
+} ?>

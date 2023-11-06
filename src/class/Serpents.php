@@ -24,10 +24,12 @@ class Serpents
         return $sql->executeRequest("SELECT COUNT(*) AS totalSerpents FROM serpents WHERE $colonne = $value ");
     }
 
-    public function paginate($colonne, $sens, $position, $nombreParPage, $isDead = 0, $inLoveRoom = 0)
+    public function paginate($colonne, $sens, $position, $nombreParPage, $dataRace, $dataGenre,  $isDead = 0, $inLoveRoom = 0)
     {
         $sql = new Bdd();
-        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace WHERE isDead = $isDead AND inLoveRoom = $inLoveRoom ORDER BY $colonne $sens  LIMIT $position, $nombreParPage");
+        $raceFiltre = 'AND (nomRace = \'' . implode('\' OR nomRace = \'', $dataRace) . '\')';
+        $genreFiltre = 'AND (isMale = \'' . implode('\' OR isMale = \'', $dataGenre) . '\')';
+        return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace WHERE isDead = $isDead AND inLoveRoom = $inLoveRoom $raceFiltre $genreFiltre ORDER BY $colonne $sens  LIMIT $position, $nombreParPage");
     }
 
     public function orderBy($colonne, $sens)
