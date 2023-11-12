@@ -27,7 +27,7 @@ include_once ('./function/image.php');
 include_once("menu.php");
 ?>
 
-<main>
+<main class="mx-4">
     <?php
 
     if (isset($_GET['page'])) {

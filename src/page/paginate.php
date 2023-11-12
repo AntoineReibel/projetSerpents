@@ -9,7 +9,10 @@ $selectSerpents = $sql->selectAll();
 
 $totalSerpents = nombreSerpentsFiltre($selectSerpents);
 
-$nombrePages = (intdiv($totalSerpents, $_SESSION['paginate']) + 1)
+$nombrePages = ceil($totalSerpents / $_SESSION['paginate']);
+var_dump($totalSerpents);
+var_dump($_SESSION['paginate']);
+var_dump($nombrePages);
 ?>
 
 <ul class="flex items-center justify-center -space-x-px h-8 text-sm">
