@@ -3,8 +3,17 @@
 use class\Serpents;
 
 $serpent = new Serpents($_GET['id']);
-if (isset($_POST['kill'])){
-    $serpent->set('isDead','1');
+if (!isset($_SESSION['kill'])) {
+    $_SESSION['kill'] = ['bool'=>false,'id'=>0 ];
+}
+
+if (isset($_POST['kill'])) {
+    $serpent->set('isDead', '1');
+    if (isset($_SESSION['kill'])) {
+
+        $_SESSION['kill']['bool'] = true;
+        $_SESSION['kill']['nom'] = $serpent->get('nomSerpent');
+    }
     header('Location: index.php?page=vivarium');
 }
 

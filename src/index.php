@@ -7,7 +7,7 @@ include_once ('./function/image.php');
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -44,8 +44,6 @@ include_once("menu.php");
 
     ?>
 </main>
-
-    <?php include_once ("footer.php")?>
 
 <script src="../node_modules/flowbite/dist/flowbite.js"></script>
 </body>

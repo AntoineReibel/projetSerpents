@@ -58,7 +58,7 @@ if (isset($_POST['love'])) {
 <?php } ?>
 <?php
 if ($serpents == null) {
-    echo "y'a deguin";
+    echo "<p class='my-4'>Aucun serpent n'est présent dans la love room</p>";
 } else if (count($serpents) == 2) {
     ?>
     <div class="flex justify-around items-center py-3">
@@ -136,7 +136,7 @@ if ($serpents == null) {
         </div>
     </div>
 <?php } else { ?>
-    <div class="flex justify-around items-center bg-pink-200 py-3">
+    <div class="flex justify-around items-center py-3">
         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div>
                 <img class="rounded-t-lg" src="<?= getBigImage($serpents[0]['idRace']) ?>" alt="serpent"/>

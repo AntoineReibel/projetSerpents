@@ -79,39 +79,125 @@ if ($serpents == null && $_GET['list'] == 1) {
 } else if ($serpents == null) {
     header('location: index.php?page=vivarium');
 }
-
 ?>
 
-
+<!--Alertes--------------------------------->
 
 <?php if ($loveRoomFull) { ?>
-    <div id="alert-2" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <div id="alert-2"
+         class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+         role="alert">
         <div class="ms-3 text-sm font-medium">
             Deux serpents passent déjà du bon temps dans la love room !
         </div>
-        <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close">
+        <button type="button"
+                class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                data-dismiss-target="#alert-2" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
             </svg>
         </button>
     </div>
 <?php } ?>
+<?php if (!$loveRoomFull && isset($_POST['loveRoom'])) { ?>
+    <div id="alert-2"
+         class="flex items-center p-4 mb-4 text-pink-500 rounded-lg bg-pink-50 dark:bg-gray-800 dark:text-red-400"
+         role="alert">
+        <div class="ms-3 text-sm font-medium">
+            <?php $sendSerpent = new Serpents($_POST['loveRoom']);
+            echo $sendSerpent->get('nomSerpent'); ?> à été envoyé dans la love room !
+        </div>
+        <button type="button"
+                class="ms-auto -mx-1.5 -my-1.5 bg-pink-50 text-pink-500 rounded-lg focus:ring-2 focus:ring-pink-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                data-dismiss-target="#alert-2" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+<?php } ?>
+<?php if (isset($_SESSION['kill']) && $_SESSION['kill']['bool']) { ?>
+    <div id="alert-2"
+         class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+         role="alert">
+        <div class="ms-3 text-sm font-medium">
+            <?= $_SESSION['kill']['nom'] ?> n'est plus parmi nous :(
+        </div>
+        <button type="button"
+                class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                data-dismiss-target="#alert-2" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+    <?php $_SESSION['kill']['bool'] = false;
+} ?>
 <?php if ($tooMuchFilter) { ?>
-    <div id="alert-2" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <div id="alert-2"
+         class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+         role="alert">
         <div class="ms-3 text-sm font-medium">
             Oups ! Vous ne pouvez pas filtrer l'intégralité des serpents !
         </div>
-        <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close">
+        <button type="button"
+                class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                data-dismiss-target="#alert-2" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+<?php } ?>
+<?php if (isset($_SESSION['modifier']) && $_SESSION['modifier']['bool']) { ?>
+    <div id="alert-2"
+         class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+         role="alert">
+        <div class="ms-3 text-sm font-medium">
+            <?= $_SESSION['modifier']['nom'] ?> à bien été modifié.
+        </div>
+        <button type="button"
+                class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
+                data-dismiss-target="#alert-2" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+    <?php $_SESSION['modifier']['bool'] = false;
+} ?>
+<?php if (isset($_POST['create'])) { ?>
+    <div id="alert-2"
+         class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+         role="alert">
+        <div class="ms-3 text-sm font-medium">
+            15 serpents ont été créés !
+        </div>
+        <button type="button"
+                class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
+                data-dismiss-target="#alert-2" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
             </svg>
         </button>
     </div>
 <?php } ?>
 
-<h1 class="text-center text-emerald-600 font-bold text-xl mb-4" >Le vivarium</h1>
+<!--fin alertes----------------------------->
+
+<h1 class="text-center text-emerald-600 font-bold text-xl mb-4">Le vivarium</h1>
 
 <div class="flex items-center justify-start gap-3 py-4 bg-white dark:bg-gray-800">
     <a href="index.php?page=create">
@@ -295,10 +381,10 @@ if ($serpents == null && $_GET['list'] == 1) {
     </div>
 
 
-<script>
-    document.getElementById('itemByPageSelect').addEventListener('change', function () {
-        document.getElementById('itemByPage').submit();
-    });
-</script>
+    <script>
+        document.getElementById('itemByPageSelect').addEventListener('change', function () {
+            document.getElementById('itemByPage').submit();
+        });
+    </script>
 
 <?php } ?>

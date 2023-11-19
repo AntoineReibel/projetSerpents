@@ -6,15 +6,24 @@ use class\Serpents;
 $bdd = new Races();
 $races = $bdd->selectAll();
 $serpent = new Serpents($_GET['id']);
+if (!isset($_SESSION['modifier'])) {
+    $_SESSION['modifier'] = ['bool'=>false,'id'=>0 ];
+}
 
 if (isset($_POST['edit'])) {
     $serpent->set('nomSerpent', $_POST['nomSerpent']);
     $serpent->set('isMale', $_POST['genre']);
     $serpent->set('poids', $_POST['poids']);
     $serpent->set('idRace', $_POST['race']);
-    if ($_POST['checkbox']) {
+    if (isset($_POST['checkbox']) && $_POST['checkbox']) {
         $serpent->set('dureeDeVie', ajout15Minutes($serpent->get('dureeDeVie')));
     }
+    if (isset($_SESSION['modifier'])) {
+
+        $_SESSION['modifier']['bool'] = true;
+        $_SESSION['modifier']['nom'] = $serpent->get('nomSerpent');
+    }
+    header('Location: index.php?page=vivarium');
 }
 
 ?>
