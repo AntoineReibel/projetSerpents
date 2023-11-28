@@ -6,9 +6,9 @@ use class\Serpents;
 $serpent = new Serpents($_GET['id']);
 $race = new Races($serpent->get('idRace'));
 
-if ($serpent->get('idmere') != null) {
-    $elders = $serpent->getElders();
-}
+
+$elders = $serpent->getElders();
+$descendants = $serpent->getChildrens();
 ?>
 <div class="flex justify-around items-start gap-4">
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -37,8 +37,8 @@ if ($serpent->get('idmere') != null) {
         </div>
     </div>
     <div>
-        <h2 class="text-center text-emerald-600 font-bold text-xl mb-4">Parents</h2>
-        <?php if ($serpent->get('idmere') == null) { ?>
+        <h2 class="text-center text-emerald-600 font-bold text-xl mb-4">Parents: </h2>
+        <?php if ($elders == null) { ?>
 
             <div><?= $serpent->get('nomSerpent') ?> à été créé en laboratoire</div>
         <?php } else { ?>
@@ -64,6 +64,19 @@ if ($serpent->get('idmere') != null) {
             </div>
             <div>Père: <a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id= <?= $elders['pere']['id'] ?>"><?= $elders['pere']['nom'] ?></a></div>
             <div>Mère: <a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id= <?= $elders['mere']['id'] ?>"><?= $elders['mere']['nom'] ?></a></div>
+        <?php } ?>
+
+        <h2 class="text-center text-emerald-600 font-bold text-xl my-4">Enfants: </h2>
+        <?php if ($descendants == null) { ?>
+            <div><?= $serpent->get('nomSerpent') ?> n'a pas de descendance</div>
+        <?php } else { ?>
+            <?php foreach ($descendants['enfants'] as $enfant) { ?>
+                <div><a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id= <?= $enfant['id'] ?>"><?= $enfant['nom'] ?></a></div>
+            <?php } ?>
+            <h2 class="text-center text-emerald-600 font-bold text-xl my-4">Petits-enfants: </h2>
+            <?php foreach ($descendants['petitEnfants'] as $petitEnfant) { ?>
+                <div><a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id= <?= $petitEnfant['id'] ?>"><?= $petitEnfant['nom'] ?></a></div>
+            <?php } ?>
         <?php } ?>
     </div>
 </div>

@@ -91,7 +91,7 @@ class Serpents
         return $sql->executeRequest("SELECT * FROM $this->table INNER JOIN races ON id_races = idRace WHERE inLoveRoom = 1 AND isDead = 0");
     }
 
-    public function getElders() : ?array
+    public function getElders(): ?array
     {
         $serpents = $this->selectAllWithDeads();
         if ($this->get('idPere') != null) {
@@ -110,14 +110,41 @@ class Serpents
             return [
                 'pere' => $pere,
                 'mere' => $mere,
-                'grandPerePaternel' => $grandPerePaternel['id'] == null ? ['id' => null,'nom' => null] : $grandPerePaternel,
-                'grandMerePaternelle' => $grandMerePaternelle['id'] == null ? ['id' => null,'nom' => null] : $grandMerePaternelle,
-                'grandPereMaternel' => $grandPereMaternel['id'] == null ? ['id' => null,'nom' => null] : $grandPereMaternel,
-                'grandMereMaternelle' => $grandMereMaternelle['id'] == null ? ['id' => null,'nom' => null] : $grandMereMaternelle,
+                'grandPerePaternel' => $grandPerePaternel['id'] == null ? ['id' => null, 'nom' => null] : $grandPerePaternel,
+                'grandMerePaternelle' => $grandMerePaternelle['id'] == null ? ['id' => null, 'nom' => null] : $grandMerePaternelle,
+                'grandPereMaternel' => $grandPereMaternel['id'] == null ? ['id' => null, 'nom' => null] : $grandPereMaternel,
+                'grandMereMaternelle' => $grandMereMaternelle['id'] == null ? ['id' => null, 'nom' => null] : $grandMereMaternelle,
             ];
         }
 
         return null;
+
+    }
+
+    public function getChildrens()
+    {
+
+        $enfant = [];
+        $petitsEnfants = [];
+
+        $serpents = $this->selectAllWithDeads();
+        foreach ($serpents as $serpentEnfant) {
+            if ($serpentEnfant['idPere'] == $this->id || $serpentEnfant['idMere'] == $this->id) {
+                $enfant[] = ['id' => $serpentEnfant['id_serpents'], 'nom' => $serpentEnfant['nomSerpent']];
+                foreach ($serpents as $serpentPetitEnfant) {
+                    if ($serpentPetitEnfant['idPere'] == $serpentEnfant['id_serpents'] || $serpentPetitEnfant['idMere'] == $serpentEnfant['id_serpents']) {
+                        $petitsEnfants[] = ['id' => $serpentPetitEnfant['id_serpents'], 'nom' => $serpentPetitEnfant['nomSerpent']];
+                    }
+                }
+            }
+
+        }
+
+        if ($enfant == []) {
+            return null;
+        }
+
+        return ['enfants' => $enfant, 'petitEnfants' => $petitsEnfants];
 
     }
 
