@@ -27,7 +27,7 @@ class Serpents
     public function count($colonne, $value)
     {
         $sql = new Bdd();
-        return $sql->executeRequest("SELECT COUNT(*) AS totalSerpents FROM serpents WHERE $colonne = $value ");
+        return $sql->executeRequest("SELECT COUNT(*) AS totalSerpents FROM serpents WHERE isDead = 0 AND $colonne = $value ");
     }
 
     public function paginate($colonne, $sens, $position, $nombreParPage, $dataRace, $dataGenre, $isDead = 0, $inLoveRoom = 0)
