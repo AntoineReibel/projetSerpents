@@ -30,7 +30,7 @@ if (isset($_POST['love']) && count($serpents) == 2) {
          class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">
-            La mort a empêcher les serpents de s'amuser :(
+            La mort a empêché les serpents de s'amuser :(
         </div>
         <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
@@ -66,8 +66,8 @@ if (isset($_POST['love']) && count($serpents) == 2) {
          class="flex items-center p-4 my-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
          role="alert">
         <div class="ml-3 text-sm font-medium">
-            Les serpents se sont bien amusés et il y a un nouveau venu ! <?= htmlspecialchars($bdd->get('nomSerpent', $newBorn)) ?> à
-            rejoins le vivarium !
+            Les serpents se sont bien amusés et il y a un nouveau venu ! <?= htmlspecialchars($bdd->get('nomSerpent', $newBorn)) ?> a
+            rejoint le vivarium !
         </div>
         <button type="button"
                 class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
