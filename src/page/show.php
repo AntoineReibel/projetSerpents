@@ -4,6 +4,10 @@ use class\Races;
 use class\Serpents;
 
 $serpent = new Serpents($_GET['id']);
+$dead = $serpent->kill();
+if ($dead){
+    $_SESSION['tooOld'] = true;
+}
 $race = new Races($serpent->get('idRace'));
 
 
@@ -11,7 +15,7 @@ $elders = $serpent->getElders();
 $descendants = $serpent->getChildrens();
 ?>
 <div class="flex justify-around items-start gap-4">
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
         <div>
             <img class="rounded-t-lg" src="<?= getBigImage($serpent->get('idRace')) ?>" alt="serpent"/>
         </div>
@@ -35,6 +39,11 @@ $descendants = $serpent->getChildrens();
                 Va mourir le <?= (new DateTime($serpent->get('dureeDeVie')))->format('d/m/y \à H\hi'); ?>
             </div>
         </div>
+        <?php if ($serpent->get('isDead') == 1) { ?>
+            <div class="flex justify-center items-center absolute h-8 w-44 bg-red-600 text-white font-bold top-14 right-0 rounded-l-lg shadow">
+                DÉCÉDÉ
+            </div>
+        <?php } ?>
     </div>
     <div>
         <h2 class="text-center text-emerald-600 font-bold text-xl mb-4">Parents: </h2>
@@ -62,8 +71,12 @@ $descendants = $serpent->getChildrens();
                     ? '<a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id=' . $elders['grandMereMaternelle']['id'] . '">' . $elders['grandMereMaternelle']['nom'] . '</a>'
                     : 'Aucune' ?>
             </div>
-            <div>Père: <a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id= <?= $elders['pere']['id'] ?>"><?= $elders['pere']['nom'] ?></a></div>
-            <div>Mère: <a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id= <?= $elders['mere']['id'] ?>"><?= $elders['mere']['nom'] ?></a></div>
+            <div>Père: <a class="text-emerald-600 hover:text-emerald-700 underline"
+                          href="index.php?page=show&id= <?= $elders['pere']['id'] ?>"><?= $elders['pere']['nom'] ?></a>
+            </div>
+            <div>Mère: <a class="text-emerald-600 hover:text-emerald-700 underline"
+                          href="index.php?page=show&id= <?= $elders['mere']['id'] ?>"><?= $elders['mere']['nom'] ?></a>
+            </div>
         <?php } ?>
 
         <h2 class="text-center text-emerald-600 font-bold text-xl my-4">Enfants: </h2>
@@ -71,11 +84,13 @@ $descendants = $serpent->getChildrens();
             <div><?= $serpent->get('nomSerpent') ?> n'a pas de descendance</div>
         <?php } else { ?>
             <?php foreach ($descendants['enfants'] as $enfant) { ?>
-                <div><a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id= <?= $enfant['id'] ?>"><?= $enfant['nom'] ?></a></div>
+                <div><a class="text-emerald-600 hover:text-emerald-700 underline"
+                        href="index.php?page=show&id= <?= $enfant['id'] ?>"><?= $enfant['nom'] ?></a></div>
             <?php } ?>
             <h2 class="text-center text-emerald-600 font-bold text-xl my-4">Petits-enfants: </h2>
             <?php foreach ($descendants['petitEnfants'] as $petitEnfant) { ?>
-                <div><a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id= <?= $petitEnfant['id'] ?>"><?= $petitEnfant['nom'] ?></a></div>
+                <div><a class="text-emerald-600 hover:text-emerald-700 underline"
+                        href="index.php?page=show&id= <?= $petitEnfant['id'] ?>"><?= $petitEnfant['nom'] ?></a></div>
             <?php } ?>
         <?php } ?>
     </div>

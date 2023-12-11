@@ -83,6 +83,10 @@ $serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSI
 
 if ($serpents == null && $_GET['list'] == 1) {
     $vivariumEmpty = true;
+} else if ($serpents == null && $dead) {
+    $_SESSION['tooOld'] = true;
+    header('location: index.php?page=vivarium');
+    exit();
 } else if ($serpents == null) {
     header('location: index.php?page=vivarium');
     exit();
@@ -107,7 +111,8 @@ if ($serpents == null && $_GET['list'] == 1) {
             </svg>
         </button>
     </div>
-<?php $_SESSION['tooOld'] = false; } ?>
+    <?php $_SESSION['tooOld'] = false;
+} ?>
 <?php if ($loveRoomFull) { ?>
     <div id="alert-2"
          class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
@@ -328,14 +333,16 @@ if ($serpents == null && $_GET['list'] == 1) {
     <p class="my-4">Bienvenue dans le vivarium ! Il n'y a pour l'instant aucun serpent. N'hésitez pas à en créer de
         nouveaux !</p>
     <ul class="list-disc">Vous pouvez :
-    <li>Créer 15 serpents aléatoirement</li>
+        <li>Créer 15 serpents aléatoirement</li>
         <li>Créer un serpent sur mesure</li>
         <li>Modifier les caractéristiques d'un serpent et rallonger sa durée de vie</li>
         <li>Voir son profil et sa famille</li>
         <li>Tuer un serpent :(</li>
         <li>Envoyer des serpents dans la love room pour qu'ils s'accouplent</li>
     </ul>
-    <p class="my-4">Attention ! Les serpents meurent rapidement ! Des alertes en haut de la page sont là pour vous aider.</p>
+    <p class="my-4">Attention ! Les serpents meurent rapidement ! Des alertes en haut de la page sont là pour vous
+        aider.</p><br>
+    <p>Vous pouvez retrouver les serpents qui s'amusent dans la love room en y accédant par le menu. Ils peuvent même avoir des bébés ! Mais attention au genre et à la race.</p>
 <?php } else { ?>
     <div class="flex justify-center gap-14 my-6 items-center">
         <div class="flex text-3xl gap-2">
