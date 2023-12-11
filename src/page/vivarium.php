@@ -6,11 +6,11 @@ use class\Serpents;
 $bdd = new Races();
 $races = $bdd->selectAll();
 $bdd = new Serpents();
-$countMale = $bdd->count('isMale', 1);
-$countFemale = $bdd->count('isMale', 0);
+$dead = $bdd->kill();
 $loveRoomFull = false;
 $vivariumEmpty = false;
 $tooMuchFilter = false;
+$deadLover = false;
 
 if (!isset($_SESSION['order'])) {
     $_SESSION['order'] =
@@ -46,7 +46,9 @@ if (isset($_POST['itemByPageSelect'])) {
 
 if (isset($_POST['loveRoom'])) {
     $serpentsInLoveRoom = $bdd->count('inLoveRoom', 1);
-    if ($serpentsInLoveRoom[0]['totalSerpents'] < 2) {
+    if ($bdd->get('isDead', $_POST['loveRoom']) == 1) {
+        $deadLover = true;
+    } else if ($serpentsInLoveRoom[0]['totalSerpents'] < 2) {
         $bdd->set('inLoveRoom', 1, $_POST['loveRoom']);
     } else {
         $loveRoomFull = true;
@@ -74,17 +76,38 @@ if (isset($_POST['filtrer'])) {
     }
 }
 
+$countMale = $bdd->count('isMale', 1);
+$countFemale = $bdd->count('isMale', 0);
+
 $serpents = $bdd->paginate($_SESSION['currentOrder'], $_SESSION['order'][$_SESSION['currentOrder']], (isset($_GET['list']) ? (($_GET['list'] - 1) * $_SESSION['paginate']) : 0), $_SESSION['paginate'], $_SESSION['filtres']['races'], $_SESSION['filtres']['isMale']);
 
 if ($serpents == null && $_GET['list'] == 1) {
     $vivariumEmpty = true;
 } else if ($serpents == null) {
     header('location: index.php?page=vivarium');
+    exit();
 }
 ?>
 
 <!--Alertes--------------------------------->
-
+<?php if ($dead || isset($_SESSION['tooOld']) && $_SESSION['tooOld']) { ?>
+    <div id="alert-1"
+         class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+         role="alert">
+        <div class="ms-3 text-sm font-medium">
+            Certains serpents sont mort :(
+        </div>
+        <button type="button"
+                class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
+                data-dismiss-target="#alert-1" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+<?php $_SESSION['tooOld'] = false; } ?>
 <?php if ($loveRoomFull) { ?>
     <div id="alert-2"
          class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
@@ -103,8 +126,8 @@ if ($serpents == null && $_GET['list'] == 1) {
         </button>
     </div>
 <?php } ?>
-<?php if (!$loveRoomFull && isset($_POST['loveRoom'])) { ?>
-    <div id="alert-2"
+<?php if (!$loveRoomFull && isset($_POST['loveRoom']) && !$deadLover) { ?>
+    <div id="alert-3"
          class="flex items-center p-4 mb-4 text-pink-500 rounded-lg bg-pink-50 dark:bg-gray-800 dark:text-red-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">
@@ -113,7 +136,7 @@ if ($serpents == null && $_GET['list'] == 1) {
         </div>
         <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-pink-50 text-pink-500 rounded-lg focus:ring-2 focus:ring-pink-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
-                data-dismiss-target="#alert-2" aria-label="Close">
+                data-dismiss-target="#alert-3" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -123,7 +146,7 @@ if ($serpents == null && $_GET['list'] == 1) {
     </div>
 <?php } ?>
 <?php if (isset($_SESSION['kill']) && $_SESSION['kill']['bool']) { ?>
-    <div id="alert-2"
+    <div id="alert-4"
          class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">
@@ -131,7 +154,7 @@ if ($serpents == null && $_GET['list'] == 1) {
         </div>
         <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
-                data-dismiss-target="#alert-2" aria-label="Close">
+                data-dismiss-target="#alert-4" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -142,7 +165,7 @@ if ($serpents == null && $_GET['list'] == 1) {
     <?php $_SESSION['kill']['bool'] = false;
 } ?>
 <?php if ($tooMuchFilter) { ?>
-    <div id="alert-2"
+    <div id="alert-5"
          class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">
@@ -150,7 +173,7 @@ if ($serpents == null && $_GET['list'] == 1) {
         </div>
         <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
-                data-dismiss-target="#alert-2" aria-label="Close">
+                data-dismiss-target="#alert-5" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -160,7 +183,7 @@ if ($serpents == null && $_GET['list'] == 1) {
     </div>
 <?php } ?>
 <?php if (isset($_SESSION['modifier']) && $_SESSION['modifier']['bool']) { ?>
-    <div id="alert-2"
+    <div id="alert-6"
          class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">
@@ -168,7 +191,7 @@ if ($serpents == null && $_GET['list'] == 1) {
         </div>
         <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
-                data-dismiss-target="#alert-2" aria-label="Close">
+                data-dismiss-target="#alert-6" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -179,7 +202,7 @@ if ($serpents == null && $_GET['list'] == 1) {
     <?php $_SESSION['modifier']['bool'] = false;
 } ?>
 <?php if (isset($_POST['create'])) { ?>
-    <div id="alert-2"
+    <div id="alert-7"
          class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">
@@ -187,7 +210,7 @@ if ($serpents == null && $_GET['list'] == 1) {
         </div>
         <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
-                data-dismiss-target="#alert-2" aria-label="Close">
+                data-dismiss-target="#alert-7" aria-label="Close">
             <span class="sr-only">Close</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -304,6 +327,15 @@ if ($serpents == null && $_GET['list'] == 1) {
 <?php if ($vivariumEmpty) { ?>
     <p class="my-4">Bienvenue dans le vivarium ! Il n'y a pour l'instant aucun serpent. N'hésitez pas à en créer de
         nouveaux !</p>
+    <ul class="list-disc">Vous pouvez :
+    <li>Créer 15 serpents aléatoirement</li>
+        <li>Créer un serpent sur mesure</li>
+        <li>Modifier les caractéristiques d'un serpent et rallonger sa durée de vie</li>
+        <li>Voir son profil et sa famille</li>
+        <li>Tuer un serpent :(</li>
+        <li>Envoyer des serpents dans la love room pour qu'ils s'accouplent</li>
+    </ul>
+    <p class="my-4">Attention ! Les serpents meurent rapidement ! Des alertes en haut de la page sont là pour vous aider.</p>
 <?php } else { ?>
     <div class="flex justify-center gap-14 my-6 items-center">
         <div class="flex text-3xl gap-2">

@@ -2,6 +2,9 @@
 
 namespace class;
 
+use DateTime;
+use DateTimeZone;
+
 class Serpents
 {
     public function __construct(
@@ -146,6 +149,22 @@ class Serpents
 
         return ['enfants' => $enfant, 'petitEnfants' => $petitsEnfants];
 
+    }
+
+    public function kill() : bool
+    {
+        $serpents = $this->selectAll();
+        $now = (new DateTime('now', new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+        $dead = false;
+
+        foreach ($serpents as $serpent) {
+            if ($serpent['dureeDeVie'] < $now) {
+                $this->set('isDead', 1, $serpent['id_serpents']);
+                $this->set('inLoveRoom', 0, $serpent['id_serpents']);
+                $dead = true;
+            }
+        }
+        return $dead;
     }
 
     private function randomName(): string

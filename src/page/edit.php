@@ -6,6 +6,12 @@ use class\Serpents;
 $bdd = new Races();
 $races = $bdd->selectAll();
 $serpent = new Serpents($_GET['id']);
+$serpent->kill();
+if ($serpent->get('isDead') == 1){
+    $_SESSION['tooOld'] = true;
+    header('Location: index.php?page=vivarium');
+    exit();
+}
 if (!isset($_SESSION['modifier'])) {
     $_SESSION['modifier'] = ['bool'=>false,'id'=>0 ];
 }

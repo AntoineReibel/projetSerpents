@@ -45,7 +45,7 @@ foreach ($serpents as $serpent) {
         </td>
         <td class="px-6 py-4">
             <a href="index.php?page=show&id= <?= $serpent['id_serpents'] ?> "
-               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Profil</a>
+               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Profil / Famille</a>
         </td>
     </tr>
     <?php
