@@ -20,7 +20,7 @@ $descendants = $serpent->getChildrens();
             <img class="rounded-t-lg" src="<?= getBigImage($serpent->get('idRace')) ?>" alt="serpent"/>
         </div>
         <div class="flex flex-col items-center p-5 gap-3">
-            <div class="font-bold text-2xl"><?= $serpent->get('nomSerpent') ?></div>
+            <div class="font-bold text-2xl"><?= htmlspecialchars($serpent->get('nomSerpent')) ?></div>
             <div class="flex gap-2">
                 <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <?= $race->get('nomRace') ?>
@@ -29,7 +29,7 @@ $descendants = $serpent->getChildrens();
                     <?php echo $serpent->get('isMale') ? 'Male' : 'Femelle'; ?>
                 </div>
                 <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <?= $serpent->get('poids') ?>Kg
+                    <?= htmlspecialchars($serpent->get('poids')) ?>Kg
                 </div>
             </div>
             <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -49,33 +49,33 @@ $descendants = $serpent->getChildrens();
         <h2 class="text-center text-emerald-600 font-bold text-xl mb-4">Parents: </h2>
         <?php if ($elders == null) { ?>
 
-            <div><?= $serpent->get('nomSerpent') ?> à été créé en laboratoire</div>
+            <div><?= htmlspecialchars($serpent->get('nomSerpent')) ?> à été créé en laboratoire</div>
         <?php } else { ?>
             <div>Grand-père paternel:
                 <?= $elders['grandPerePaternel']['nom'] !== null
-                    ? '<a class="text-emerald-600 underline" href="index.php?page=show&id=' . $elders['grandPerePaternel']['id'] . '">' . $elders['grandPerePaternel']['nom'] . '</a>'
+                    ? '<a class="text-emerald-600 underline" href="index.php?page=show&id=' . $elders['grandPerePaternel']['id'] . '">' . htmlspecialchars($elders['grandPerePaternel']['nom']) . '</a>'
                     : 'Aucun' ?>
             </div>
             <div>Grand-mère paternelle:
                 <?= $elders['grandMerePaternelle']['nom'] !== null
-                    ? '<a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id=' . $elders['grandMerePaternelle']['id'] . '">' . $elders['grandMerePaternelle']['nom'] . '</a>'
+                    ? '<a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id=' . $elders['grandMerePaternelle']['id'] . '">' . htmlspecialchars($elders['grandMerePaternelle']['nom']) . '</a>'
                     : 'Aucune' ?>
             </div>
             <div>Grand-père maternel:
                 <?= $elders['grandPereMaternel']['nom'] !== null
-                    ? '<a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id=' . $elders['grandPereMaternel']['id'] . '">' . $elders['grandPereMaternel']['nom'] . '</a>'
+                    ? '<a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id=' . $elders['grandPereMaternel']['id'] . '">' . htmlspecialchars($elders['grandPereMaternel']['nom']) . '</a>'
                     : 'Aucun' ?>
             </div>
             <div>Grand-mère maternelle:
                 <?= $elders['grandMereMaternelle']['nom'] !== null
-                    ? '<a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id=' . $elders['grandMereMaternelle']['id'] . '">' . $elders['grandMereMaternelle']['nom'] . '</a>'
+                    ? '<a class="text-emerald-600 hover:text-emerald-700 underline" href="index.php?page=show&id=' . $elders['grandMereMaternelle']['id'] . '">' . htmlspecialchars($elders['grandMereMaternelle']['nom']) . '</a>'
                     : 'Aucune' ?>
             </div>
             <div>Père: <a class="text-emerald-600 hover:text-emerald-700 underline"
-                          href="index.php?page=show&id= <?= $elders['pere']['id'] ?>"><?= $elders['pere']['nom'] ?></a>
+                          href="index.php?page=show&id= <?= $elders['pere']['id'] ?>"><?= htmlspecialchars($elders['pere']['nom']) ?></a>
             </div>
             <div>Mère: <a class="text-emerald-600 hover:text-emerald-700 underline"
-                          href="index.php?page=show&id= <?= $elders['mere']['id'] ?>"><?= $elders['mere']['nom'] ?></a>
+                          href="index.php?page=show&id= <?= $elders['mere']['id'] ?>"><?= htmlspecialchars($elders['mere']['nom']) ?></a>
             </div>
         <?php } ?>
 
@@ -85,12 +85,12 @@ $descendants = $serpent->getChildrens();
         <?php } else { ?>
             <?php foreach ($descendants['enfants'] as $enfant) { ?>
                 <div><a class="text-emerald-600 hover:text-emerald-700 underline"
-                        href="index.php?page=show&id= <?= $enfant['id'] ?>"><?= $enfant['nom'] ?></a></div>
+                        href="index.php?page=show&id= <?= $enfant['id'] ?>"><?= htmlspecialchars($enfant['nom']) ?></a></div>
             <?php } ?>
             <h2 class="text-center text-emerald-600 font-bold text-xl my-4">Petits-enfants: </h2>
             <?php foreach ($descendants['petitEnfants'] as $petitEnfant) { ?>
                 <div><a class="text-emerald-600 hover:text-emerald-700 underline"
-                        href="index.php?page=show&id= <?= $petitEnfant['id'] ?>"><?= $petitEnfant['nom'] ?></a></div>
+                        href="index.php?page=show&id= <?= $petitEnfant['id'] ?>"><?= htmlspecialchars($petitEnfant['nom']) ?></a></div>
             <?php } ?>
         <?php } ?>
     </div>

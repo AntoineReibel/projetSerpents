@@ -137,7 +137,7 @@ if ($serpents == null && $_GET['list'] == 1) {
          role="alert">
         <div class="ms-3 text-sm font-medium">
             <?php $sendSerpent = new Serpents($_POST['loveRoom']);
-            echo $sendSerpent->get('nomSerpent'); ?> à été envoyé dans la love room !
+            echo htmlspecialchars($sendSerpent->get('nomSerpent')); ?> à été envoyé dans la love room !
         </div>
         <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-pink-50 text-pink-500 rounded-lg focus:ring-2 focus:ring-pink-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
@@ -155,7 +155,7 @@ if ($serpents == null && $_GET['list'] == 1) {
          class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">
-            <?= $_SESSION['kill']['nom'] ?> n'est plus parmi nous :(
+            <?= htmlspecialchars($_SESSION['kill']['nom']) ?> n'est plus parmi nous :(
         </div>
         <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
@@ -192,7 +192,7 @@ if ($serpents == null && $_GET['list'] == 1) {
          class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
          role="alert">
         <div class="ms-3 text-sm font-medium">
-            <?= $_SESSION['modifier']['nom'] ?> à bien été modifié.
+            <?= htmlspecialchars($_SESSION['modifier']['nom']) ?> à bien été modifié.
         </div>
         <button type="button"
                 class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"

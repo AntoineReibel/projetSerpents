@@ -21,7 +21,7 @@ foreach ($serpents as $serpent) {
             <img class="w-10 h-10 rounded-full" src="<?= getImage($serpent['idRace']) ?>"
                  alt="Jese image">
             <div class="pl-3">
-                <div class="text-base font-semibold"><?= $serpent['nomSerpent'] ?></div>
+                <div class="text-base font-semibold"><?= htmlspecialchars($serpent['nomSerpent']) ?></div>
                 <div class="font-normal text-gray-500"></div>
             </div>
         </th>
@@ -35,7 +35,7 @@ foreach ($serpents as $serpent) {
             </div>
         </td>
         <td class="px-6 py-4">
-            <?= $serpent['poids'] ?>kg
+            <?= htmlspecialchars($serpent['poids']) ?>kg
         </td>
         <td class="px-6 py-4">
             <?= (new DateTime($serpent['dateNaissance']))->format('d/m/y \à H\hi'); ?>

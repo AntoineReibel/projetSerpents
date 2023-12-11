@@ -66,7 +66,7 @@ if (isset($_POST['love']) && count($serpents) == 2) {
          class="flex items-center p-4 my-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
          role="alert">
         <div class="ml-3 text-sm font-medium">
-            Les serpents se sont bien amusés et il y a un nouveau venu ! <?= $bdd->get('nomSerpent', $newBorn) ?> à
+            Les serpents se sont bien amusés et il y a un nouveau venu ! <?= htmlspecialchars($bdd->get('nomSerpent', $newBorn)) ?> à
             rejoins le vivarium !
         </div>
         <button type="button"
@@ -108,7 +108,7 @@ if ($serpents == null) {
                 <img class="rounded-t-lg" src="<?= getBigImage($serpents[0]['idRace']) ?>" alt="serpent"/>
             </div>
             <div class="flex flex-col items-center p-5 gap-3">
-                <div class="font-bold text-2xl"><?= $serpents[0]['nomSerpent'] ?></div>
+                <div class="font-bold text-2xl"><?= htmlspecialchars($serpents[0]['nomSerpent']) ?></div>
                 <div class="flex gap-2">
                     <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <?= $serpents[0]['nomRace'] ?>
@@ -117,7 +117,7 @@ if ($serpents == null) {
                         <?php echo $serpents[0]['isMale'] ? 'Male' : 'Femelle'; ?>
                     </div>
                     <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <?= $serpents[0]['poids'] ?>Kg
+                        <?= htmlspecialchars($serpents[0]['poids']) ?>Kg
                     </div>
                 </div>
                 <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -148,7 +148,7 @@ if ($serpents == null) {
                 <img class="rounded-t-lg" src="<?= getBigImage($serpents[1]['idRace']) ?>" alt="serpent"/>
             </div>
             <div class="flex flex-col items-center p-5 gap-3">
-                <div class="font-bold text-2xl"><?= $serpents[1]['nomSerpent'] ?></div>
+                <div class="font-bold text-2xl"><?= htmlspecialchars($serpents[1]['nomSerpent']) ?></div>
                 <div class="flex gap-2">
                     <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <?= $serpents[1]['nomRace'] ?>
@@ -157,7 +157,7 @@ if ($serpents == null) {
                         <?php echo $serpents[1]['isMale'] ? 'Male' : 'Femelle'; ?>
                     </div>
                     <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <?= $serpents[1]['poids'] ?>Kg
+                        <?= htmlspecialchars($serpents[1]['poids']) ?>Kg
                     </div>
                 </div>
                 <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -183,7 +183,7 @@ if ($serpents == null) {
                 <img class="rounded-t-lg" src="<?= getBigImage($serpents[0]['idRace']) ?>" alt="serpent"/>
             </div>
             <div class="flex flex-col items-center p-5 gap-3">
-                <div class="font-bold text-2xl"><?= $serpents[0]['nomSerpent'] ?></div>
+                <div class="font-bold text-2xl"><?= htmlspecialchars($serpents[0]['nomSerpent']) ?></div>
                 <div class="flex gap-2">
                     <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         <?= $serpents[0]['nomRace'] ?>
@@ -192,7 +192,7 @@ if ($serpents == null) {
                         <?php echo $serpents[0]['isMale'] ? 'Male' : 'Femelle'; ?>
                     </div>
                     <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <?= $serpents[0]['poids'] ?>Kg
+                        <?= htmlspecialchars($serpents[0]['poids']) ?>Kg
                     </div>
                 </div>
                 <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-emerald-600 rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
