@@ -25,6 +25,7 @@ if (isset($_POST['love']) && count($serpents) == 2) {
     }
 }
 ?>
+<h1 class="text-center text-fuchsia-500 font-bold text-xl mt-4">La Love Room</h1>
 <?php if (count($serpents) != 2 && isset($_POST['love'])) { ?>
     <div id="alert-1"
          class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
@@ -66,7 +67,8 @@ if (isset($_POST['love']) && count($serpents) == 2) {
          class="flex items-center p-4 my-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
          role="alert">
         <div class="ml-3 text-sm font-medium">
-            Les serpents se sont bien amusés et il y a un nouveau venu ! <?= htmlspecialchars($bdd->get('nomSerpent', $newBorn)) ?> a
+            Les serpents se sont bien amusés et il y a un nouveau venu
+            ! <?= htmlspecialchars($bdd->get('nomSerpent', $newBorn)) ?> a
             rejoint le vivarium !
         </div>
         <button type="button"
@@ -102,7 +104,7 @@ if ($serpents == null) {
     echo "<p class='my-4'>Aucun serpent n'est présent dans la love room</p>";
 } else if (count($serpents) == 2) {
     ?>
-    <div class="flex justify-around items-center py-3">
+    <div class="flex flex-col lg:flex-row gap-4 justify-around items-center py-3">
         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div>
                 <img class="rounded-t-lg" src="<?= getBigImage($serpents[0]['idRace']) ?>" alt="serpent"/>

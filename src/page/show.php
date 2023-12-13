@@ -14,7 +14,7 @@ $race = new Races($serpent->get('idRace'));
 $elders = $serpent->getElders();
 $descendants = $serpent->getChildrens();
 ?>
-<div class="flex justify-around items-start gap-4">
+<div class="flex flex-col md:flex-row justify-around items-center gap-4">
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
         <div>
             <img class="rounded-t-lg" src="<?= getBigImage($serpent->get('idRace')) ?>" alt="serpent"/>
